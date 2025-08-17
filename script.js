@@ -11,9 +11,6 @@
 // Parte de Leonardo (Sempre deixe 10 linhas de distancias para a parte do colega seguinte)
 
 
-
-
-
  // Com o acumulador e o reduce que sao a "alma" do jogo programado, faremos o return para fechar a função.
 
   return tentativa.split("").map((letra, i) => {
@@ -37,10 +34,7 @@
     return { letra, status: "absent" };
   });
 
-  //Chegamos ao fim da função verificarJogada 
-
-
-
+  //Fim da função   
 
 
 
