@@ -53,12 +53,28 @@
 
 // Parte de Victor.
 
+// Por fim, o join tem a funcao de juntar todo uma uma unica string, formando a palavra visualizada.
 
-
-
-
-
-
+const view = (estado) => `
+  <div class="grid">
+    ${Array.from({ length: estado.maxTentativas }).map((_, row) => `
+      ${Array.from({ length: estado.palavra.length }).map((_, col) => {
+        const tentativa = estado.tentativas[row];
+        const cell = tentativa ? tentativa[col] : { letra: "", status: "" };
+        return `<div class="cell ${cell.status}">${cell.letra}</div>`;
+      }).join("")}
+    `).join("")}
+  </div>
+  ${jogoVencido(estado) || jogoPerdido(estado) ? `
+    <p class="mensagem">
+      ${jogoVencido(estado) ? "🎉 Você venceu!" : `💀 Você perdeu! A palavra era: ${estado.palavra}`}
+    </p>
+    <button data-action="reiniciar">🔄 Reiniciar</button>
+  ` : `
+    <input id="entrada" maxlength="${estado.palavra.length}" placeholder="Digite a palavra">
+    <button data-action="tentar">Tentar</button>
+  `}
+`;
 
 
 //.
