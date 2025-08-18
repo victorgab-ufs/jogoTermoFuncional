@@ -94,5 +94,28 @@ const view = (estado) => `
   `}
 `;
 
+// A segunda metade do código de visualização é responsável pelas mensagens de vitória ou derrota, inclusive os botões de reiniciar e tentar
+
+
+// Visando a dinamicidade do jogo, usamos uma função natural não pura, para misturar as palavras e ela não ficar de forma estática
+const palavras = ["TERMO", "CRATO", "PLENA", "GRATO"];
+const palavraEscolhida = palavras[Math.floor(Math.random() * palavras.length)];
+
+
+// Vamos criar os botões que chamam as funções
+const updateState = (estado, acao) => {
+
+  //Botão tentar, chama a função tentarTermo
+  if (acao.type === "tentar") {
+    return tentarPalavra(estado, acao.payload);
+  }
+
+  //Botão reiniciar, reinicia o jogo.
+  if (acao.type === "reiniciar") {
+    return location.reload(true); // Sempre retorna a palavra fixa
+  }
+  return estado;
+};
+
 
 //.
