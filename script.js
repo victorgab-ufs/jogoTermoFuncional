@@ -1,11 +1,18 @@
 // Parte de Renato (Sempre deixe 10 linhas de distancias para a parte do colega seguinte)
+// Créditos: https://youtu.be/ceWOxPgw0pc?si=LSWMrGSbVDtYxlSx @pasquadev
 
+// Registro de dados necessários para o jogo iniciar
+const inicializarJogo = (palavra) => ({
 
+//Colocar tudo que o jogador digitar em maiusculo para evitar problemas:
+  palavra: palavra.toUpperCase(),
 
+//Constante para verificar se o jogador ganhou ou perdeu o jogo
+  tentativas: [],
 
-
-
-
+//Definimos que o jogador tem no maximo 6 chances, logo:
+  maxTentativas: 6
+});
 
 
 
