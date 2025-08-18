@@ -8,6 +8,7 @@
 
 
 
+
 // Parte de Leonardo (Sempre deixe 10 linhas de distancias para a parte do colega seguinte)
 
 
@@ -37,6 +38,23 @@
   });
 
   //Fim da função   
+
+}; //Fecha a função que Renato vai abrir, por enquanto vai dar erro!!!
+
+
+
+
+  //Agora vamos verificar se o jogador venceu ou perdeu o jogo ---
+
+
+//Criar uma constante para verificar se uma letra digitada esta em seu lugar correto
+
+const jogoVencido = (estado) =>
+  estado.tentativas.some(t => t.every(c => c.status === "correct"));
+
+//Para o jogador perder o jogador deve exceder 6 chances e a situacao ser diferente de venceu
+const jogoPerdido = (estado) =>
+  estado.tentativas.length >= estado.maxTentativas && !jogoVencido(estado);
 
 
 
