@@ -122,4 +122,25 @@ const updateState = (estado, acao) => {
 };
 
 
+//Agora vamos implementar os codigos auxiliares criados.
+const app = (estado) => {
+  document.getElementById("app").innerHTML = view(estado);
+
+
+
+//Acionar o addEventListener para os clicks nos botões tentar e reiniciar serem funcionais
+  document.querySelectorAll("[data-action]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const novaAcao = btn.dataset.action === "tentar"
+        ? { type: "tentar", payload: document.getElementById("entrada").value }
+        : { type: "reiniciar" };
+      app(updateState(estado, novaAcao));
+    });
+  });
+};
+
+// Start Game!
+app(inicializarJogo(palavraEscolhida));
+
+
 //.
