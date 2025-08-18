@@ -1,0 +1,45 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #f4f4f4;
+  color: #333;
+}
+
+#app {
+  margin: auto;
+  max-width: 300px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 50px);
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.cell {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  border: 2px solid #ccc;
+}
+
+.correct {
+  background: #6aaa64;
+  color: white;
+}
+
+.present {
+  background: #c9b458;
+  color: white;
+}
+
+.absent {
+  background: #787c7e;
+  color: white;
+}
