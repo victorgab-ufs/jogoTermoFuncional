@@ -142,7 +142,7 @@ const palavraEscolhida = palavras[Math.floor(Math.random() * palavras.length)];
 // Vamos criar os botões que chamam as funções
 const updateState = (estado, acao) => {
 
-  //Botão tentar, chama a função tentarTermo
+  //Botão tentar, chama a função tentarPalavra
   if (acao.type === "tentar") {
     return tentarPalavra(estado, acao.payload);
   }
