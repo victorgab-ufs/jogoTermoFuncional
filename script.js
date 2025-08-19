@@ -1,4 +1,3 @@
-// Parte de Renato (Sempre deixe 10 linhas de distancias para a parte do colega seguinte)
 // Créditos: https://youtu.be/ceWOxPgw0pc?si=LSWMrGSbVDtYxlSx @pasquadev
 
 // Registro de dados necessários para o jogo iniciar
@@ -14,9 +13,38 @@ const inicializarJogo = (palavra) => ({
   maxTentativas: 6
 });
 
+// Aqui inicia a logica do jogo
+const verificarTentativa = (palavra, tentativa) => {
+
+   // O objeitivo do jogo é a leitura das letras de uma palavra, vamos quebrar uma palavra em varias letras:
+  const letrasIniciais = palavra.split("");
 
 
-// Parte de Leonardo (Sempre deixe 10 linhas de distancias para a parte do colega seguinte)
+//A logica do jogo funcionará da seguinte forma: como o jogo está "preso" em um paradigma funcional, vamos abusar do uso de spreads para realizar cópias a todo momento e do reduce para acumular e armazenar temporariamente nossos resultados, ficando assim:
+
+const { resultadoParcial, letrasRestantes } = tentativa.split("").reduce(
+  (acc, letra, i) => {
+    // Agora vamos acumular as tentativas dos jogadores em cópias para respeitar o paradigma funcional
+    const novoResultado = [...acc.resultadoParcial];
+    const novasLetrasRestantes = [...acc.letrasRestantes];
+
+     //Verificando as palavras na condicional. Se ele acertar, vamos colocar no array de acerto e retirar das letras faltantes
+    
+    if (palavra[i] === letra) {
+      novoResultado[i] = { letra, status: "correct" };
+      novasLetrasRestantes[i] = null;
+    }
+
+    return {
+      resultadoParcial: novoResultado,
+      letrasRestantes: novasLetrasRestantes
+    };
+  },
+  //Dessa forma terminamos de programar nosso acumulador
+
+  //Essas sao as duas listas que vao rodar nosso jogo e fechamos nosso reduce com elas
+  { resultadoParcial: [], letrasRestantes: [...letrasIniciais] }
+);
 
 // Com o acumulador e o reduce que sao a "alma" do jogo programado, faremos o return para fechar a função.
 
@@ -43,12 +71,9 @@ const inicializarJogo = (palavra) => ({
 
   //Fim da função   
 
-}; //Fecha a função que Renato vai abrir, por enquanto vai dar erro!!!
+}; 
 
-
-
-
-  //Agora vamos verificar se o jogador venceu ou perdeu o jogo ---
+//Agora vamos verificar se o jogador venceu ou perdeu o jogo ---
 
 
 //Criar uma constante para verificar se uma letra digitada esta em seu lugar correto
@@ -82,13 +107,7 @@ const tentarPalavra = (estado, palavra) => {
 
 // Agora faremos a parte visual do dinamica que aparecera na pagina WEB, faremos via JS
 
-
 // A logica da visualizacao WEB é simples, primeiro criamos linhas como máximo de tentativas que temos, ou seja, 6. Depois, criamos colunas com o maximo de letras do nosso termo. O map vai iterar nessas listas de modo funcional!
-
-
-
-
-// Parte de Victor.
 
 // Por fim, o join tem a funcao de juntar todo uma uma unica string, formando a palavra visualizada.
 
@@ -114,7 +133,6 @@ const view = (estado) => `
 `;
 
 // A segunda metade do código de visualização é responsável pelas mensagens de vitória ou derrota, inclusive os botões de reiniciar e tentar
-
 
 // Visando a dinamicidade do jogo, usamos uma função natural não pura, para misturar as palavras e ela não ficar de forma estática
 const palavras = ["TERMO", "CRATO", "PLENA", "GRATO"];
@@ -157,5 +175,3 @@ const app = (estado) => {
 // Start Game!
 app(inicializarJogo(palavraEscolhida));
 
-
-//.
