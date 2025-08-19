@@ -135,7 +135,7 @@ const view = (estado) => `
 // A segunda metade do código de visualização é responsável pelas mensagens de vitória ou derrota, inclusive os botões de reiniciar e tentar
 
 // Visando a dinamicidade do jogo, usamos uma função natural não pura, para misturar as palavras e ela não ficar de forma estática
-const palavras = ["TERMO", "CRATO", "PLENA", "GRATO"];
+const palavras = ["TERMO", "CRIME", "PLENA", "GRATO", "PIZZA"];
 const palavraEscolhida = palavras[Math.floor(Math.random() * palavras.length)];
 
 
