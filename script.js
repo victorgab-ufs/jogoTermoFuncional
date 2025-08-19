@@ -60,15 +60,30 @@ const jogoVencido = (estado) =>
 const jogoPerdido = (estado) =>
   estado.tentativas.length >= estado.maxTentativas && !jogoVencido(estado);
 
+// Vamos formalizar o jogo
+
+const tentarPalavra = (estado, palavra) => {
+
+  //primeiro precisamos que o jogador insira exatamente uma palavra com 5 letras, caso contrario a situacao dele permanece inalterada, dessa forma
+  if (palavra.length !== estado.palavra.length) return estado;
+
+  //De forma similar, precisamos que o jogo acabe, ou seja, se o jogador perder ou vencer qualquer outra tentativa é ignorada
+  if (jogoVencido(estado) || jogoPerdido(estado)) return estado;
 
 
 
+   // Agora vamos fazer o jogo "rodar"!
+    // Ela funciona com 2 parametros, entao precisamos adicionar 2 paramentros em verificar tentativa.
+  const tentativaVerificada = verificarTentativa(estado.palavra, palavra.toUpperCase());
+
+  //Por fim o retorno da funcao tentarTermo retornara o valor da lista situacao, visando o paradigma, fara copias das listas para respeitar o paradigma funcional
+  return { ...estado, tentativas: [...estado.tentativas, tentativaVerificada] };
+};
+
+// Agora faremos a parte visual do dinamica que aparecera na pagina WEB, faremos via JS
 
 
-
-
-
-
+// A logica da visualizacao WEB é simples, primeiro criamos linhas como máximo de tentativas que temos, ou seja, 6. Depois, criamos colunas com o maximo de letras do nosso termo. O map vai iterar nessas listas de modo funcional!
 
 
 

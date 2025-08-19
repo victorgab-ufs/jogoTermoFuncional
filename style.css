@@ -43,3 +43,27 @@ body {
   background: #787c7e;
   color: white;
 }
+
+input {
+  padding: 8px;
+  font-size: 1em;
+  text-transform: uppercase;
+  width: 100px;
+  text-align: center;
+}
+
+button {
+  padding: 8px 12px;
+  font-size: 1em;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #eee;
+}
+
+.mensagem {
+  font-weight: bold;
+  margin-top: 10px;
+}
