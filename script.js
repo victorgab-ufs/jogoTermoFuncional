@@ -135,7 +135,7 @@ const view = (estado) => `
 // A segunda metade do código de visualização é responsável pelas mensagens de vitória ou derrota, inclusive os botões de reiniciar e tentar
 
 // Visando a dinamicidade do jogo, usamos uma função natural não pura, para misturar as palavras e ela não ficar de forma estática
-const palavras = ["TERMO", "CRIME", "PLENA", "GRATO", "PIZZA"];
+const palavras = ["TERMO", "CRIME", "PLENA", "GRATO", "PIZZA", "PALMO", "AMPLA", "HIENA", "VELHO", "LAPSO", "TAMPA", "DENTE", "PALHA", "LUZES", "TECLA", "ZEBRA", "TIMES", "TRUTA", "FRUTA", "LUNAR", "PANOS", "CASAR", "CALHA", "TELHA", "BICOS", "OXIDO", "FALHA", "MARES", "FACAS", "FOLHA", "LABIO", "PARTO", "TIGRE", "NAVIO", "LENTE", "LEITE", "LINUX", "UREIA", "FEMUR", "OTITE", "PRUMO", "BRUTO", "PULSO", "PULSA", "SONAR", "CHAVE", "MEIAS", "ARARA", "VISOR", "TINTA", "SOLAR", "FERRO", "MISTO", "LIXOS", "TIROS", "PINTO", "MACHO"];
 const palavraEscolhida = palavras[Math.floor(Math.random() * palavras.length)];
 
 
