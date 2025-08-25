@@ -6,6 +6,7 @@ const inicializarJogo = (palavra) => ({
 //Colocar tudo que o jogador digitar em maiusculo para evitar problemas:
   palavra: palavra.toUpperCase(),
 
+
 //Constante para verificar se o jogador ganhou ou perdeu o jogo
   tentativas: [],
 
@@ -91,6 +92,15 @@ const tentarPalavra = (estado, palavra) => {
 
   //primeiro precisamos que o jogador insira exatamente uma palavra com 5 letras, caso contrario a situacao dele permanece inalterada, dessa forma
   if (palavra.length !== estado.palavra.length) return estado;
+  //Remover a situação onde jogador insere 5 caracteres vazios
+  if (palavra == "     ") return estado;
+  //Remover a situação onde há espaços depois e antes das strings
+  if (palavra !== palavra.trim()) return estado;
+
+
+// Primeiro tentamos remover os espaços manualmente, não conseguimos fazer com espaços entre strings, por isso tivemos que recorrer a um código REGEX para eliminição de espaços entre palavras.
+  if (palavra !== palavra.replace(/\s/g, '')) return estado;
+
 
   //De forma similar, precisamos que o jogo acabe, ou seja, se o jogador perder ou vencer qualquer outra tentativa é ignorada
   if (jogoVencido(estado) || jogoPerdido(estado)) return estado;
@@ -136,6 +146,7 @@ const view = (estado) => `
 
 // Visando a dinamicidade do jogo, usamos uma função natural não pura, para misturar as palavras e ela não ficar de forma estática
 const palavras = ["TERMO", "CRIME", "PLENA", "GRATO", "PIZZA", "PALMO", "AMPLA", "HIENA", "VELHO", "LAPSO", "TAMPA", "DENTE", "PALHA", "LUZES", "TECLA", "ZEBRA", "TIMES", "TRUTA", "FRUTA", "LUNAR", "PANOS", "CASAR", "CALHA", "TELHA", "BICOS", "OXIDO", "FALHA", "MARES", "FACAS", "FOLHA", "LABIO", "PARTO", "TIGRE", "NAVIO", "LENTE", "LEITE", "LINUX", "UREIA", "FEMUR", "OTITE", "PRUMO", "BRUTO", "PULSO", "PULSA", "SONAR", "CHAVE", "MEIAS", "ARARA", "VISOR", "TINTA", "SOLAR", "FERRO", "MISTO", "LIXOS", "TIROS", "PINTO", "MACHO"];
+
 const palavraEscolhida = palavras[Math.floor(Math.random() * palavras.length)];
 
 
