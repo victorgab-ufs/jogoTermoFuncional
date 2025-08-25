@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap');
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Mitr", sans-serif;
   text-align: center;
-  background: #f4f4f4;
-  color: #333;
+  background: #2F4F4F;
+  color: white;
 }
 
 #app {
