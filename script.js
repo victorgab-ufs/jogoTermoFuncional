@@ -173,15 +173,34 @@ const app = (estado) => {
 
 
 //Acionar o addEventListener para os clicks nos botões tentar e reiniciar serem funcionais
-  document.querySelectorAll("[data-action]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const novaAcao = btn.dataset.action === "tentar"
-        ? { type: "tentar", payload: document.getElementById("entrada").value }
-        : { type: "reiniciar" };
-      app(updateState(estado, novaAcao));
-    });
+
+// Função para executar a ação
+function executarAcao(tipo, payload = null) {
+  const novaAcao = tipo === "tentar" 
+    ? { type: "tentar", payload: payload || document.getElementById("entrada").value }
+    : { type: "reiniciar" };
+  
+  app(updateState(estado, novaAcao));
+}
+
+// Eventos dos botões
+document.querySelectorAll("[data-action]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    executarAcao(btn.dataset.action);
   });
+});
+
+// Evento da tecla Enter
+document.getElementById("entrada").addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    executarAcao("tentar");
+  }
+});
 };
+
+
+
 
 // Start Game!
 app(inicializarJogo(palavraEscolhida));
