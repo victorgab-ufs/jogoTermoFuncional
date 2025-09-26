@@ -175,7 +175,7 @@ const app = (estado) => {
 //Acionar o addEventListener para os clicks nos botões tentar e reiniciar serem funcionais
 
 // Função para executar a ação
-function executarAcao(tipo, payload = null) {
+const executarAcao = (tipo, payload = null) => {
   const novaAcao = tipo === "tentar" 
     ? { type: "tentar", payload: payload || document.getElementById("entrada").value }
     : { type: "reiniciar" };
