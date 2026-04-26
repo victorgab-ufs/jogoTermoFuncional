@@ -1,71 +1,295 @@
 @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap');
 
+:root {
+  --bg: #284b4b;
+  --panel: #f7f3e8;
+  --text: #ffffff;
+  --ink: #1e2929;
+  --border: #d9ddd5;
+  --correct: #4f9d69;
+  --present: #c4a642;
+  --absent: #596265;
+  --focus: #7fffd4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
+  --darkness: 0;
+  min-height: 100vh;
+  margin: 0;
+  padding: 32px 16px;
   font-family: "Mitr", sans-serif;
   text-align: center;
-  background: #2F4F4F;
-  color: white;
+  background:
+    radial-gradient(circle at top, rgba(127, 255, 212, 0.16), transparent 34rem),
+    var(--bg);
+  color: var(--text);
+  transition: background-color 220ms ease;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: rgba(0, 0, 0, var(--darkness));
+  transition: background 280ms ease;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  margin: 0 0 24px;
+  font-size: clamp(2rem, 8vw, 3.2rem);
+  font-weight: 700;
 }
 
 #app {
+  width: min(100%, 520px);
   margin: auto;
-  max-width: 300px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(5, 50px);
-  gap: 5px;
+  gap: 8px;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(5, 56px);
+  gap: 8px;
 }
 
 .cell {
-  width: 50px;
-  height: 50px;
+  width: 56px;
+  aspect-ratio: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
-  font-size: 1.2em;
-  border: 2px solid #ccc;
+  padding: 0;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  font: inherit;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: default;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 120ms ease;
+}
+
+.cell.editable {
+  cursor: pointer;
+}
+
+.cell.editable.filled {
+  border-color: rgba(255, 255, 255, 0.82);
+}
+
+.cell.active {
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px rgba(127, 255, 212, 0.25);
+  transform: translateY(-1px);
+}
+
+.cell:focus {
+  outline: none;
 }
 
 .correct {
-  background: #6aaa64;
+  background: var(--correct);
+  border-color: var(--correct);
   color: white;
 }
 
 .present {
-  background: #c9b458;
+  background: var(--present);
+  border-color: var(--present);
   color: white;
 }
 
 .absent {
-  background: #787c7e;
+  background: var(--absent);
+  border-color: var(--absent);
   color: white;
 }
 
-input {
-  padding: 8px;
-  font-size: 1em;
-  text-transform: uppercase;
-  width: 100px;
-  text-align: center;
+.mensagem {
+  min-height: 32px;
+  margin: 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
-button {
-  padding: 8px 12px;
-  font-size: 1em;
-  margin-left: 5px;
+.mensagem.empty {
+  visibility: hidden;
+}
+
+.keyboard {
+  width: min(100%, 520px);
+  display: grid;
+  gap: 6px;
+  margin: 0 auto 16px;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.key {
+  min-width: 0;
+  height: 46px;
+  flex: 1;
+  border: 0;
+  border-radius: 6px;
+  padding: 0 6px;
+  background: #e3e7df;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    opacity 160ms ease,
+    transform 120ms ease;
+}
+
+.key.wide {
+  flex: 1.65;
+  font-size: 0.82rem;
+}
+
+.key:hover,
+.key:focus-visible {
+  background: var(--focus);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.key.correct,
+.key.present,
+.key.absent {
+  color: white;
+}
+
+.key.correct {
+  background: var(--correct);
+}
+
+.key.present {
+  background: var(--present);
+}
+
+.key.absent {
+  background: var(--absent);
+  opacity: 0.45;
+}
+
+.key.correct:hover,
+.key.correct:focus-visible {
+  background: var(--correct);
+}
+
+.key.present:hover,
+.key.present:focus-visible {
+  background: var(--present);
+}
+
+.key.absent:hover,
+.key.absent:focus-visible {
+  background: var(--absent);
+  opacity: 0.62;
+}
+
+.actions {
+  min-height: 42px;
+}
+
+.actions button {
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--panel);
   cursor: pointer;
 }
 
-button:hover {
-  background: #7FFFD4	
+.actions button:hover,
+.actions button:focus-visible {
+  background: var(--focus);
+  outline: none;
 }
 
-.mensagem {
-  font-weight: bold;
-  margin-top: 10px;
+.cell:hover,
+.cell:focus-visible {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.cell.correct:hover,
+.cell.correct:focus-visible {
+  background: var(--correct);
+}
+
+.cell.present:hover,
+.cell.present:focus-visible {
+  background: var(--present);
+}
+
+.cell.absent:hover,
+.cell.absent:focus-visible {
+  background: var(--absent);
+}
+
+@media (max-width: 360px) {
+  body {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .row {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .cell {
+    width: 100%;
+  }
+
+  .keyboard,
+  .keyboard-row {
+    gap: 4px;
+  }
+
+  .key {
+    height: 42px;
+    border-radius: 5px;
+    padding: 0 3px;
+    font-size: 0.82rem;
+  }
+
+  .key.wide {
+    flex: 1.45;
+    font-size: 0.68rem;
+  }
 }
