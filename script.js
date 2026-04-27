@@ -114,7 +114,7 @@ const inicializarJogo = (palavra, bancoPalavras, fonte) => ({
   cursor: 0,
   mensagem: "",
   maxTentativas: MAX_TENTATIVAS
-});
+});  
 
 const verificarTentativa = (palavra, tentativa) => {
   const letrasIniciais = palavra.split("");
